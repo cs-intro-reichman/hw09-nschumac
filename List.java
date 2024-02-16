@@ -31,6 +31,7 @@ public class List {
     public void addFirst(char chr) {
         // Your code goes here
         first = new Node(new CharData(chr), first);
+        size++;
     }
     
     /** GIVE Textual representation of this list. */
@@ -86,6 +87,8 @@ public class List {
         // Your code goes here
         if (first.cp.equals(chr)) {
             first = first.next;
+            size--;
+            return true;
         }
 
         Node previous = first;
@@ -93,6 +96,7 @@ public class List {
             Node current = previous.next;
             if (current.cp.equals(chr)) {
                 previous.next = current.next;
+                size--;
                 return true;
             }
             previous = current;
