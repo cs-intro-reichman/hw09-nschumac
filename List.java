@@ -73,7 +73,7 @@ public class List {
     public void update(char chr) {
         // Your code goes here
         ListIterator lIterator = listIterator(0);
-        while (lIterator.hasNext()) {
+        while (lIterator != null && lIterator.hasNext()) {
             CharData current = lIterator.next();
             if (current.equals(chr)) {
                 current.count++;
