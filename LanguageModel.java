@@ -95,7 +95,7 @@ public class LanguageModel {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(initialText);
 
-        while (stringBuilder.length() < textLength) {
+        while (stringBuilder.length() < textLength + initialText.length()) {
             String key = stringBuilder.substring(stringBuilder.length() - windowLength);
             stringBuilder.append(getRandomChar(CharDataMap.get(key)));
         }
