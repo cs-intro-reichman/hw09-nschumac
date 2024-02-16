@@ -43,9 +43,12 @@ public class List {
 
         stringBuilder.append("(");
         while (lIterator.hasNext()) {
-            stringBuilder.append(" " + lIterator.next());
+            stringBuilder.append(lIterator.next());
+            if (lIterator.hasNext()) {
+                stringBuilder.append(" ");
+            }
         }
-        stringBuilder.append(" )");
+        stringBuilder.append(")");
         return stringBuilder.toString();
     }
 
