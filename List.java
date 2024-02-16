@@ -42,7 +42,7 @@ public class List {
 
         stringBuilder.append("(");
         while (lIterator.hasNext()) {
-            stringBuilder.append(" " + lIterator.next().chr);
+            stringBuilder.append(" " + lIterator.next());
         }
         stringBuilder.append(" )");
         return stringBuilder.toString();
