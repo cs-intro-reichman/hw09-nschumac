@@ -72,7 +72,7 @@ public class List {
      *  given chr to the beginning of this list. */
     public void update(char chr) {
         // Your code goes here
-        ListIterator lIterator = new ListIterator(first);
+        ListIterator lIterator = listIterator(0);
         while (lIterator.hasNext()) {
             CharData current = lIterator.next();
             if (current.equals(chr)) {

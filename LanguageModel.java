@@ -48,11 +48,17 @@ public class LanguageModel {
 	// characters in the given list. */
 	public void calculateProbabilities(List probs) {				
 		// Your code goes here
-        int totalLength = probs.getSize();
+        int totalCharCount = 0;
+
+        ListIterator lIterator = probs.listIterator(0);
+        while (lIterator.hasNext()) {
+            totalCharCount += lIterator.next().count;
+        }
+
         double cp = 0.0;
-        for (int i = 0; i < totalLength; ++i) {
+        for (int i = 0; i < probs.getSize(); ++i) {
             CharData currentCharData = probs.get(i);
-            currentCharData.p = (double)currentCharData.count / totalLength;
+            currentCharData.p = (double)currentCharData.count / totalCharCount;
             currentCharData.cp = (double)cp + currentCharData.p;
             cp += currentCharData.p;
         }
