@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class LanguageModel {
 
@@ -33,18 +34,42 @@ public class LanguageModel {
 
     /** Builds a language model from the text in the given file (the corpus). */
 	public void train(String fileName) {
-		// Your code goes here
+
+        for (int i = 0; i < fileName.length() - windowLength ; ++i) {
+            String key = fileName.substring(i, windowLength);
+            if (CharDataMap.get(key) == null) {
+                CharDataMap.put(key, new List());
+            }
+            CharDataMap.get(key).update(fileName.charAt(i + windowLength));
+        }
 	}
 
     // Computes and sets the probabilities (p and cp fields) of all the
 	// characters in the given list. */
 	public void calculateProbabilities(List probs) {				
 		// Your code goes here
+        int totalLength = probs.getSize();
+        double cp = 0.0;
+        for (int i = 0; i < totalLength; ++i) {
+            CharData currentCharData = probs.get(i);
+            currentCharData.p = (double)currentCharData.count / totalLength;
+            currentCharData.cp = (double)cp + currentCharData.p;
+            cp += currentCharData.p;
+        }
 	}
 
     // Returns a random character from the given probabilities list.
 	public char getRandomChar(List probs) {
-		// Your code goes here
+        double cpValue = randomGenerator.nextDouble();
+        CharData[] charDataArray = probs.toArray();
+
+        for (CharData cd : charDataArray) {
+            if (cd.cp > cpValue) {
+                return cd.chr;
+            }
+        }
+        // will never get here
+        return ' '; 
 	}
 
     /**
@@ -56,7 +81,15 @@ public class LanguageModel {
 	 */
 	public String generate(String initialText, int textLength) {
 		// Your code goes here
-	}
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(initialText);
+
+        while (stringBuilder.length() < textLength) {
+            String key = stringBuilder.substring(stringBuilder.length() - windowLength);
+            stringBuilder.append(getRandomChar(CharDataMap.get(key)));
+        }
+        return stringBuilder.toString();
+    }
 
     /** Returns a string representing the map of this language model. */
 	public String toString() {
