@@ -51,7 +51,7 @@ public class LanguageModel {
         int totalCharCount = 0;
 
         ListIterator lIterator = probs.listIterator(0);
-        while (lIterator.hasNext()) {
+        while (lIterator != null && lIterator.hasNext()) {
             totalCharCount += lIterator.next().count;
         }
 
