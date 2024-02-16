@@ -112,7 +112,7 @@ public class List {
      *  throws an IndexOutOfBoundsException. */
     public CharData get(int index) {
         Node current = first;
-        for (int i = 0; current.next != null; ++i) {
+        for (int i = 0; current != null; ++i) {
             if (i == index) {
                 return current.cp;
             }
